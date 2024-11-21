@@ -63,14 +63,14 @@ public class PeliculaController {
         peliculaService.eliminarPelicula(id);
     }
 
-    @GetMapping("/peliculas/asignar/{idActor}/{idPelicula}")
-    public void asignarActor(@PathVariable("idActor") Integer idActor, @PathVariable("idPelicula") Integer idPelicula) {
-        peliculaService.asignarActor(idActor, idPelicula);
+    @GetMapping("/peliculas/asignar/{idPelicula}/{idActor}")
+    public void asignarActor(@PathVariable("idPelicula") Integer idPelicula, @PathVariable("idActor") Integer idActor) {
+        peliculaService.asignarActor(idPelicula, idActor);
     }
 
-    @GetMapping("/peliculas/desasignar/{idActor}/{idPelicula}")
-    public void desasignarActor(@PathVariable("idActor") Integer idActor, @PathVariable("idPelicula") Integer idPelicula) {
-        peliculaService.desasignarActor(idActor, idPelicula);
+    @GetMapping("/peliculas/desasignar/{idPelicula}/{idActor}")
+    public void desasignarActor(@PathVariable("idPelicula") Integer idPelicula, @PathVariable("idActor") Integer idActor) {
+        peliculaService.desasignarActor(idPelicula, idActor);
     }
 
 }
