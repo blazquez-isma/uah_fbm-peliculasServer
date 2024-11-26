@@ -1,7 +1,10 @@
 package es.uah.ismael.fbm.peliculasServer.controller;
 
+import es.uah.ismael.fbm.peliculasServer.model.Actor;
 import es.uah.ismael.fbm.peliculasServer.model.Pelicula;
+import es.uah.ismael.fbm.peliculasServer.service.IActorService;
 import es.uah.ismael.fbm.peliculasServer.service.IPeliculaService;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,8 +13,13 @@ import java.util.List;
 @RestController
 public class PeliculaController {
 
+    Logger log = org.slf4j.LoggerFactory.getLogger(PeliculaController.class);
+
     @Autowired
     private IPeliculaService peliculaService;
+
+    @Autowired
+    private IActorService actorService;
 
     @GetMapping("/peliculas")
     public List<Pelicula> buscarTodos() {
@@ -21,6 +29,11 @@ public class PeliculaController {
     @GetMapping("/peliculas/{id}")
     public Pelicula buscarPeliculaPorId(@PathVariable("id") Integer id) {
         return peliculaService.buscarPeliculaPorId(id);
+    }
+
+    @GetMapping("/peliculas/tituloCompleto/{titulo}")
+    public Pelicula buscarPeliculasPorTituloCompleto(@PathVariable("titulo") String titulo) {
+        return peliculaService.buscarPeliculaPorTituloCompleto(titulo);
     }
 
     @GetMapping("/peliculas/titulo/{titulo}")
@@ -55,6 +68,22 @@ public class PeliculaController {
 
     @PutMapping("/peliculas")
     public void actualizarPelicula(@RequestBody Pelicula pelicula) {
+        Pelicula peliculaBefore = peliculaService.buscarPeliculaPorId(pelicula.getIdPelicula());
+        for (Actor actor : peliculaBefore.getActores()) {
+            if (!pelicula.getActores().contains(actor)) {
+                Actor actorUpdate = actorService.buscarActorPorId(actor.getIdActor());
+                actorUpdate.getPeliculas().remove(peliculaBefore);
+                actorService.actualizarActor(actorUpdate);
+            }
+        }
+
+        for (Actor actor : pelicula.getActores()) {
+            if (!peliculaBefore.getActores().contains(actor)) {
+                Actor actorUpdate = actorService.buscarActorPorId(actor.getIdActor());
+                actorUpdate.getPeliculas().add(pelicula);
+                actorService.actualizarActor(actorUpdate);
+            }
+        }
         peliculaService.actualizarPelicula(pelicula);
     }
 

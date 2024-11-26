@@ -12,9 +12,9 @@ public interface IPeliculaDAO {
 
 //    Pelicula buscarPeliculaPorTitulo(String titulo);
 
-    List<Pelicula> buscarPeliculasPorTitulo(String titulo);
+    Pelicula buscarPeliculaPorTituloCompleto(String titulo);
 
-    List<Pelicula> buscarPeliculasPorAnio(Integer anio);
+    List<Pelicula> buscarPeliculasPorTitulo(String titulo);
 
     List<Pelicula> buscarPeliculasPorAnioBefore(Integer anio);
 

@@ -10,6 +10,10 @@ public interface IActorService {
 
     Actor buscarActorPorId(Integer idActor);
 
+    List<Actor> buscarActoresPorIds(List<Integer> ids);
+
+    Actor buscarActorPorNombreCompleto(String nombreCompleto);
+
     List<Actor> buscarActoresPorNombre(String nombre);
 
     List<Actor> buscarActoresPorPelicula(Integer idPelicula);

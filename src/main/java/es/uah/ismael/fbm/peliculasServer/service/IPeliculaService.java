@@ -10,6 +10,8 @@ public interface IPeliculaService {
 
     Pelicula buscarPeliculaPorId(Integer idPelicula);
 
+    Pelicula buscarPeliculaPorTituloCompleto(String titulo);
+
     List<Pelicula> buscarPeliculasPorTitulo(String titulo);
 
     List<Pelicula> buscarPeliculasPorAnio(Integer anio1, Integer anio2);

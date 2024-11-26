@@ -150,4 +150,20 @@ public class Pelicula {
     public int hashCode() {
         return Objects.hashCode(idPelicula);
     }
+
+    @Override
+    public String toString() {
+        return "Pelicula{" +
+                "idPelicula=" + idPelicula +
+                ", titulo='" + titulo + '\'' +
+                ", anio=" + anio +
+                ", duracion=" + duracion +
+                ", pais='" + pais + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", genero='" + genero + '\'' +
+                ", sinopsis='" + sinopsis + '\'' +
+                ", imagenPortada='" + imagenPortada + '\'' +
+//                ", actores=" + actores +
+                '}';
+    }
 }

@@ -24,19 +24,24 @@ public class PeliculaServiceImpl implements IPeliculaService {
     }
 
     @Override
+    public Pelicula buscarPeliculaPorTituloCompleto(String titulo) {
+        return peliculaDAO.buscarPeliculaPorTituloCompleto(titulo);
+    }
+
+    @Override
     public List<Pelicula> buscarPeliculasPorTitulo(String titulo) {
         return peliculaDAO.buscarPeliculasPorTitulo(titulo);
     }
 
     @Override
     public List<Pelicula> buscarPeliculasPorAnio(Integer anio1, Integer anio2) {
-        if (anio1 == null && anio2 == null) {
+        if ((anio1 == null || anio1 == 0) && (anio2 == null || anio2 == 0)) {
             return peliculaDAO.buscarTodas();
         }
-        if (anio1 == null) {
+        if (anio1 == null || anio1 == 0) {
             return peliculaDAO.buscarPeliculasPorAnioBefore(anio2);
         }
-        if (anio2 == null) {
+        if (anio2 == null || anio2 == 0) {
             return peliculaDAO.buscarPeliculasPorAnioAfter(anio1);
         }
         return peliculaDAO.buscarPeliculasPorAnioBetween(anio1, anio2);

@@ -3,7 +3,7 @@ package es.uah.ismael.fbm.peliculasServer.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -20,17 +20,15 @@ public class Actor {
     private String nombre;
 
     @Column(name = "fecha_nacimiento")
-    private LocalDate fechaNacimiento;
+    private Date fechaNacimiento;
 
     @Column(name = "pais_nacimiento", length = 100)
     private String paisNacimiento;
 
     @ManyToMany
     @JoinTable(name = "peliculas_actores",
-            joinColumns = {@JoinColumn(name = "idActor",
-                    referencedColumnName = "idActor")},
-            inverseJoinColumns = {@JoinColumn(name = "idPelicula",
-                    referencedColumnName = "idPelicula")})
+            joinColumns = {@JoinColumn(name = "idActor", referencedColumnName = "idActor")},
+            inverseJoinColumns = {@JoinColumn(name = "idPelicula", referencedColumnName = "idPelicula")})
     @JsonIgnoreProperties("actores")
     private Set<Pelicula> peliculas = new LinkedHashSet<>();
 
@@ -50,11 +48,11 @@ public class Actor {
         this.nombre = nombre;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -99,5 +97,16 @@ public class Actor {
     @Override
     public int hashCode() {
         return Objects.hashCode(idActor);
+    }
+
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "idActor=" + idActor +
+                ", nombre='" + nombre + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", paisNacimiento='" + paisNacimiento + '\'' +
+//                ", peliculas=" + peliculas +
+                '}';
     }
 }

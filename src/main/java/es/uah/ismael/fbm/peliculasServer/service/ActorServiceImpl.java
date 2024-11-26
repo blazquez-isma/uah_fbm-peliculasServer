@@ -24,6 +24,16 @@ public class ActorServiceImpl implements IActorService {
     }
 
     @Override
+    public List<Actor> buscarActoresPorIds(List<Integer> ids) {
+        return actorDAO.buscarActoresPorIds(ids);
+    }
+
+    @Override
+    public Actor buscarActorPorNombreCompleto(String nombreCompleto) {
+        return actorDAO.buscarActorPorNombreCompleto(nombreCompleto);
+    }
+
+    @Override
     public List<Actor> buscarActoresPorNombre(String nombre) {
         return actorDAO.buscarActoresPorNombre(nombre);
     }

@@ -24,6 +24,17 @@ public class ActorController {
         return actorService.buscarActorPorId(id);
     }
 
+    @PostMapping("/actores/ids")
+    public List<Actor> buscarActoresPorIds(@RequestBody List<Integer> ids) {
+        return actorService.buscarActoresPorIds(ids);
+    }
+
+    @GetMapping("/actores/nombreCompleto/{nombre}")
+    public Actor buscarActorPorNombreCompleto(@PathVariable("nombre") String nombre) {
+        return actorService.buscarActorPorNombreCompleto(nombre);
+    }
+
+
     @GetMapping("/actores/nombre/{nombre}")
     public List<Actor> buscarActoresPorNombre(@PathVariable("nombre") String nombre) {
         return actorService.buscarActoresPorNombre(nombre);

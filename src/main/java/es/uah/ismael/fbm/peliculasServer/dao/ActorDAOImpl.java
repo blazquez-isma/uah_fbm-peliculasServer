@@ -29,6 +29,16 @@ public class ActorDAOImpl implements IActorDAO{
     }
 
     @Override
+    public List<Actor> buscarActoresPorIds(List<Integer> ids) {
+        return actorRepository.findByIdActorIn(ids);
+    }
+
+    @Override
+    public Actor buscarActorPorNombreCompleto(String nombreCompleto) {
+        return actorRepository.findByNombre(nombreCompleto);
+    }
+
+    @Override
     public List<Actor> buscarActoresPorNombre(String nombre) {
         return actorRepository.findByNombreContainingIgnoreCase(nombre);
     }
