@@ -2,6 +2,7 @@ package es.uah.ismael.fbm.peliculasServer.dao;
 
 import es.uah.ismael.fbm.peliculasServer.model.Actor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IActorDAO {
@@ -16,15 +17,17 @@ public interface IActorDAO {
 
     List<Actor> buscarActoresPorNombre(String nombre);
 
+    List<Actor> buscarActoresPorFechaNacimientoBetween(LocalDate fecha1, LocalDate fecha2);
+
+    List<Actor> buscarActoresPorFechaNacimientoBefore(LocalDate fecha);
+
+    List<Actor> buscarActoresPorFechaNacimientoAfter(LocalDate fecha);
+
     void guardarActor(Actor actor);
 
     void eliminarActor(Integer idActor);
 
     void actualizarActor(Actor actor);
-
-    void asignarPelicula(Integer idActor, Integer idPelicula);
-
-    void desasignarPelicula(Integer idActor, Integer idPelicula);
 
     List<Actor> buscarActoresPorPelicula(Integer idPelicula);
 

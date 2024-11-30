@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -34,10 +35,14 @@ public class ActorController {
         return actorService.buscarActorPorNombreCompleto(nombre);
     }
 
-
     @GetMapping("/actores/nombre/{nombre}")
     public List<Actor> buscarActoresPorNombre(@PathVariable("nombre") String nombre) {
         return actorService.buscarActoresPorNombre(nombre);
+    }
+
+    @GetMapping("/actores/fechaNacimiento/{fecha1}/{fecha2}")
+    public List<Actor> buscarActoresPorFechaNacimiento(@PathVariable("fecha1") LocalDate fecha1, @PathVariable("fecha2") LocalDate fecha2) {
+        return actorService.buscarActoresPorFechaNacimiento(fecha1, fecha2);
     }
 
     @GetMapping("/actores/pelicula/{idPelicula}")
@@ -60,13 +65,4 @@ public class ActorController {
         actorService.eliminarActor(id);
     }
 
-    @GetMapping("/actores/asignar/{idActor}/{idPelicula}")
-    public void asignarPelicula(@PathVariable("idActor") Integer idActor, @PathVariable("idPelicula") Integer idPelicula) {
-        actorService.asignarPelicula(idActor, idPelicula);
-    }
-
-    @GetMapping("/actores/desasignar/{idActor}/{idPelicula}")
-    public void desasignarPelicula(@PathVariable("idActor") Integer idActor, @PathVariable("idPelicula") Integer idPelicula) {
-        actorService.desasignarPelicula(idActor, idPelicula);
-    }
 }

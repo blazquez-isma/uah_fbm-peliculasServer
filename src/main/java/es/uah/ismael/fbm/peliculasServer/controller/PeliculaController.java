@@ -63,7 +63,12 @@ public class PeliculaController {
 
     @PostMapping("/peliculas")
     public void guardarPelicula(@RequestBody Pelicula pelicula) {
-        peliculaService.guardarPelicula(pelicula);
+        Pelicula saved = peliculaService.guardarPelicula(pelicula);
+        if(pelicula.getActores() != null){
+            pelicula.getActores().forEach(actor -> {
+                actorService.asignarPelicula(actor.getIdActor(), saved);
+            });
+        }
     }
 
     @PutMapping("/peliculas")
@@ -71,17 +76,12 @@ public class PeliculaController {
         Pelicula peliculaBefore = peliculaService.buscarPeliculaPorId(pelicula.getIdPelicula());
         for (Actor actor : peliculaBefore.getActores()) {
             if (!pelicula.getActores().contains(actor)) {
-                Actor actorUpdate = actorService.buscarActorPorId(actor.getIdActor());
-                actorUpdate.getPeliculas().remove(peliculaBefore);
-                actorService.actualizarActor(actorUpdate);
+                actorService.desasignarPelicula(actor.getIdActor(), peliculaBefore);
             }
         }
-
         for (Actor actor : pelicula.getActores()) {
             if (!peliculaBefore.getActores().contains(actor)) {
-                Actor actorUpdate = actorService.buscarActorPorId(actor.getIdActor());
-                actorUpdate.getPeliculas().add(pelicula);
-                actorService.actualizarActor(actorUpdate);
+                actorService.asignarPelicula(actor.getIdActor(), peliculaBefore);
             }
         }
         peliculaService.actualizarPelicula(pelicula);
@@ -90,16 +90,6 @@ public class PeliculaController {
     @DeleteMapping("/peliculas/{id}")
     public void eliminarPelicula(@PathVariable("id") Integer id) {
         peliculaService.eliminarPelicula(id);
-    }
-
-    @GetMapping("/peliculas/asignar/{idPelicula}/{idActor}")
-    public void asignarActor(@PathVariable("idPelicula") Integer idPelicula, @PathVariable("idActor") Integer idActor) {
-        peliculaService.asignarActor(idPelicula, idActor);
-    }
-
-    @GetMapping("/peliculas/desasignar/{idPelicula}/{idActor}")
-    public void desasignarActor(@PathVariable("idPelicula") Integer idPelicula, @PathVariable("idActor") Integer idActor) {
-        peliculaService.desasignarActor(idPelicula, idActor);
     }
 
 }

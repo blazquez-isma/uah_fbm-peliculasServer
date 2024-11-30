@@ -70,8 +70,8 @@ public class PeliculaDAOImpl implements IPeliculaDAO{
     }
 
     @Override
-    public void guardarPelicula(Pelicula pelicula) {
-        peliculaRepository.save(pelicula);
+    public Pelicula guardarPelicula(Pelicula pelicula) {
+        return peliculaRepository.save(pelicula);
     }
 
     @Override
@@ -86,25 +86,4 @@ public class PeliculaDAOImpl implements IPeliculaDAO{
     public void actualizarPelicula(Pelicula pelicula) {
         peliculaRepository.save(pelicula);
     }
-
-    @Override
-    public void asignarActor(Integer idPelicula, Integer idActor) {
-        Pelicula pelicula = peliculaRepository.findById(idPelicula).orElse(null);
-        Actor actor = actorRepository.findById(idActor).orElse(null);
-        if (pelicula != null && actor != null) {
-            pelicula.addActor(actor);
-            peliculaRepository.save(pelicula);
-        }
-    }
-
-    @Override
-    public void desasignarActor(Integer idPelicula, Integer idActor) {
-        Pelicula pelicula = peliculaRepository.findById(idPelicula).orElse(null);
-        Actor actor = actorRepository.findById(idActor).orElse(null);
-        if (pelicula != null && actor != null) {
-            pelicula.removeActor(actor);
-            peliculaRepository.save(pelicula);
-        }
-    }
-
 }

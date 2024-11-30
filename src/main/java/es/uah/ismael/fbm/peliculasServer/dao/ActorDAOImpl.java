@@ -7,6 +7,7 @@ import es.uah.ismael.fbm.peliculasServer.model.Pelicula;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -14,9 +15,6 @@ public class ActorDAOImpl implements IActorDAO{
 
     @Autowired
     private IActorRepository actorRepository;
-
-    @Autowired
-    private IPeliculaRepository peliculaRepository;
 
     @Override
     public List<Actor> buscarTodos() {
@@ -44,6 +42,21 @@ public class ActorDAOImpl implements IActorDAO{
     }
 
     @Override
+    public List<Actor> buscarActoresPorFechaNacimientoBetween(LocalDate fecha1, LocalDate fecha2) {
+        return actorRepository.findByFechaNacimientoBetween(fecha1, fecha2);
+    }
+
+    @Override
+    public List<Actor> buscarActoresPorFechaNacimientoBefore(LocalDate fecha) {
+        return actorRepository.findByFechaNacimientoBefore(fecha);
+    }
+
+    @Override
+    public List<Actor> buscarActoresPorFechaNacimientoAfter(LocalDate fecha) {
+        return actorRepository.findByFechaNacimientoAfter(fecha);
+    }
+
+    @Override
     public void guardarActor(Actor actor) {
         actorRepository.save(actor);
     }
@@ -59,26 +72,7 @@ public class ActorDAOImpl implements IActorDAO{
     }
 
     @Override
-    public void asignarPelicula(Integer idActor, Integer idPelicula) {
-        Actor actor = actorRepository.findById(idActor).orElse(null);
-        if (actor != null) {
-            actor.getPeliculas().add(peliculaRepository.findById(idPelicula).orElse(null));
-            actorRepository.save(actor);
-        }
-    }
-
-    @Override
-    public void desasignarPelicula(Integer idActor, Integer idPelicula) {
-        Actor actor = actorRepository.findById(idActor).orElse(null);
-        if (actor != null) {
-            actor.getPeliculas().remove(peliculaRepository.findById(idPelicula).orElse(null));
-            actorRepository.save(actor);
-        }
-    }
-
-    @Override
     public List<Actor> buscarActoresPorPelicula(Integer idPelicula) {
-        Pelicula pelicula = peliculaRepository.findById(idPelicula).orElse(null);
-        return pelicula != null ? actorRepository.findByPeliculasContaining(pelicula) : List.of();
+        return actorRepository.findAllByPeliculaId(idPelicula);
     }
 }

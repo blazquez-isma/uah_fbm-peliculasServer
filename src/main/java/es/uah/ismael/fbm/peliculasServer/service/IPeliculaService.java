@@ -22,13 +22,9 @@ public interface IPeliculaService {
 
     List<Pelicula> buscarPeliculasPorActor(Integer idActor);
 
-    void guardarPelicula(Pelicula pelicula);
+    Pelicula guardarPelicula(Pelicula pelicula);
 
     void eliminarPelicula(Integer idPelicula);
 
     void actualizarPelicula(Pelicula pelicula);
-
-    void asignarActor(Integer idPelicula, Integer idActor);
-
-    void desasignarActor(Integer idPelicula, Integer idActor);
 }

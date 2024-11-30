@@ -2,9 +2,11 @@ package es.uah.ismael.fbm.peliculasServer.service;
 
 import es.uah.ismael.fbm.peliculasServer.dao.IActorDAO;
 import es.uah.ismael.fbm.peliculasServer.model.Actor;
+import es.uah.ismael.fbm.peliculasServer.model.Pelicula;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -44,6 +46,20 @@ public class ActorServiceImpl implements IActorService {
     }
 
     @Override
+    public List<Actor> buscarActoresPorFechaNacimiento(LocalDate fecha1, LocalDate fecha2){
+        if ((fecha1 == null || fecha1.equals(LocalDate.MIN)) && (fecha2 == null || fecha2.equals(LocalDate.MAX))) {
+            return actorDAO.buscarTodos();
+        }
+        if (fecha1 == null || fecha1.equals(LocalDate.MIN)) {
+            return actorDAO.buscarActoresPorFechaNacimientoBefore(fecha2);
+        }
+        if (fecha2 == null || fecha2.equals(LocalDate.MAX)) {
+            return actorDAO.buscarActoresPorFechaNacimientoAfter(fecha1);
+        }
+        return actorDAO.buscarActoresPorFechaNacimientoBetween(fecha1, fecha2);
+    }
+
+    @Override
     public void guardarActor(Actor actor) {
         actorDAO.guardarActor(actor);
     }
@@ -59,12 +75,16 @@ public class ActorServiceImpl implements IActorService {
     }
 
     @Override
-    public void asignarPelicula(Integer idActor, Integer idPelicula) {
-        actorDAO.asignarPelicula(idActor, idPelicula);
+    public void asignarPelicula(Integer idActor, Pelicula pelicula) {
+        Actor actorUpdate = buscarActorPorId(idActor);
+        actorUpdate.getPeliculas().add(pelicula);
+        actualizarActor(actorUpdate);
     }
 
     @Override
-    public void desasignarPelicula(Integer idActor, Integer idPelicula) {
-        actorDAO.desasignarPelicula(idActor, idPelicula);
+    public void desasignarPelicula(Integer idActor, Pelicula pelicula) {
+        Actor actorUpdate = this.buscarActorPorId(idActor);
+        actorUpdate.getPeliculas().remove(pelicula);
+        actualizarActor(actorUpdate);
     }
 }

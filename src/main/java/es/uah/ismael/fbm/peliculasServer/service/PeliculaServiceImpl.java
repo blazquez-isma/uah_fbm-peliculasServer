@@ -63,8 +63,8 @@ public class PeliculaServiceImpl implements IPeliculaService {
     }
 
     @Override
-    public void guardarPelicula(Pelicula pelicula) {
-        peliculaDAO.guardarPelicula(pelicula);
+    public Pelicula guardarPelicula(Pelicula pelicula) {
+        return peliculaDAO.guardarPelicula(pelicula);
     }
 
     @Override
@@ -75,15 +75,5 @@ public class PeliculaServiceImpl implements IPeliculaService {
     @Override
     public void actualizarPelicula(Pelicula pelicula) {
         peliculaDAO.actualizarPelicula(pelicula);
-    }
-
-    @Override
-    public void asignarActor(Integer idPelicula, Integer idActor) {
-        peliculaDAO.asignarActor(idPelicula, idActor);
-    }
-
-    @Override
-    public void desasignarActor(Integer idPelicula, Integer idActor) {
-        peliculaDAO.desasignarActor(idPelicula, idActor);
     }
 }
