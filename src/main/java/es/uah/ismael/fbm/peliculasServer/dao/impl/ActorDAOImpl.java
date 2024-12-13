@@ -1,9 +1,8 @@
-package es.uah.ismael.fbm.peliculasServer.dao;
+package es.uah.ismael.fbm.peliculasServer.dao.impl;
 
+import es.uah.ismael.fbm.peliculasServer.dao.IActorDAO;
 import es.uah.ismael.fbm.peliculasServer.dao.repository.IActorRepository;
-import es.uah.ismael.fbm.peliculasServer.dao.repository.IPeliculaRepository;
 import es.uah.ismael.fbm.peliculasServer.model.Actor;
-import es.uah.ismael.fbm.peliculasServer.model.Pelicula;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public class ActorDAOImpl implements IActorDAO{
+public class ActorDAOImpl implements IActorDAO {
 
     @Autowired
     private IActorRepository actorRepository;

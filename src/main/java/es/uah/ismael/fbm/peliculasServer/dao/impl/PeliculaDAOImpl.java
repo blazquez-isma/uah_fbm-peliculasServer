@@ -1,5 +1,6 @@
-package es.uah.ismael.fbm.peliculasServer.dao;
+package es.uah.ismael.fbm.peliculasServer.dao.impl;
 
+import es.uah.ismael.fbm.peliculasServer.dao.IPeliculaDAO;
 import es.uah.ismael.fbm.peliculasServer.dao.repository.IActorRepository;
 import es.uah.ismael.fbm.peliculasServer.dao.repository.IPeliculaRepository;
 import es.uah.ismael.fbm.peliculasServer.model.Actor;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PeliculaDAOImpl implements IPeliculaDAO{
+public class PeliculaDAOImpl implements IPeliculaDAO {
 
     @Autowired
     private IPeliculaRepository peliculaRepository;
