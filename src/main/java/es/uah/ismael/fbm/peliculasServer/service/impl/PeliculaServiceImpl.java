@@ -64,6 +64,11 @@ public class PeliculaServiceImpl implements IPeliculaService {
     }
 
     @Override
+    public String buscarTituloPeliculaPorId(Integer idPelicula) {
+        return peliculaDAO.buscarTituloPeliculaPorId(idPelicula);
+    }
+
+    @Override
     public Pelicula guardarPelicula(Pelicula pelicula) {
         return peliculaDAO.guardarPelicula(pelicula);
     }

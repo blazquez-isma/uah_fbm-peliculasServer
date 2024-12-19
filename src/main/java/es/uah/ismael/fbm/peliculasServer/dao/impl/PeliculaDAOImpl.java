@@ -87,4 +87,9 @@ public class PeliculaDAOImpl implements IPeliculaDAO {
     public void actualizarPelicula(Pelicula pelicula) {
         peliculaRepository.save(pelicula);
     }
+
+    @Override
+    public String buscarTituloPeliculaPorId(Integer idPelicula) {
+        return peliculaRepository.findTituloById(idPelicula);
+    }
 }

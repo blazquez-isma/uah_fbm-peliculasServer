@@ -10,8 +10,6 @@ public interface IPeliculaDAO {
 
     Pelicula buscarPeliculaPorId(Integer idPelicula);
 
-//    Pelicula buscarPeliculaPorTitulo(String titulo);
-
     Pelicula buscarPeliculaPorTituloCompleto(String titulo);
 
     List<Pelicula> buscarPeliculasPorTitulo(String titulo);
@@ -28,9 +26,12 @@ public interface IPeliculaDAO {
 
     List<Pelicula> buscarPeliculasPorActor(Integer idActor);
 
+    String buscarTituloPeliculaPorId(Integer idPelicula);
+
     Pelicula guardarPelicula(Pelicula pelicula);
 
     void eliminarPelicula(Integer idPelicula);
 
     void actualizarPelicula(Pelicula pelicula);
+
 }

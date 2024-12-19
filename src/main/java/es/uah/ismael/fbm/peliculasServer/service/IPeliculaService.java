@@ -22,9 +22,12 @@ public interface IPeliculaService {
 
     List<Pelicula> buscarPeliculasPorActor(Integer idActor);
 
+    String buscarTituloPeliculaPorId(Integer id);
+
     Pelicula guardarPelicula(Pelicula pelicula);
 
     void eliminarPelicula(Integer idPelicula);
 
     void actualizarPelicula(Pelicula pelicula);
+
 }
