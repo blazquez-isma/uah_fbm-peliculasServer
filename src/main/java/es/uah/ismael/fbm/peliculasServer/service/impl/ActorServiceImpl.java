@@ -1,8 +1,9 @@
-package es.uah.ismael.fbm.peliculasServer.service;
+package es.uah.ismael.fbm.peliculasServer.service.impl;
 
 import es.uah.ismael.fbm.peliculasServer.dao.IActorDAO;
 import es.uah.ismael.fbm.peliculasServer.model.Actor;
 import es.uah.ismael.fbm.peliculasServer.model.Pelicula;
+import es.uah.ismael.fbm.peliculasServer.service.IActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -61,6 +61,11 @@ public class PeliculaController {
         return peliculaService.buscarPeliculasPorActor(idActor);
     }
 
+    @GetMapping("/peliculas/titulobyid/{id}")
+    public String buscarTituloPeliculaPorId(@PathVariable("id") Integer id) {
+        return peliculaService.buscarTituloPeliculaPorId(id);
+    }
+
     @PostMapping("/peliculas")
     public void guardarPelicula(@RequestBody Pelicula pelicula) {
         Pelicula saved = peliculaService.guardarPelicula(pelicula);

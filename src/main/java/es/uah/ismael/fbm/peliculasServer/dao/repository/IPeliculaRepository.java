@@ -27,4 +27,8 @@ public interface IPeliculaRepository extends JpaRepository<Pelicula, Integer> {
 
     @Query("SELECT p FROM Pelicula p WHERE :actor MEMBER OF p.actores")
     List<Pelicula> findByActoresContaining(Actor actor);
+
+    //buscar titulo de la pelicula a partir de su id
+    @Query("SELECT p.titulo FROM Pelicula p WHERE p.idPelicula = :idPelicula")
+    String findTituloById(Integer idPelicula);
 }
